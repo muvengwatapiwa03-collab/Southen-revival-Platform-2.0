@@ -1,0 +1,206 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Individual Carbon Footprint</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+<body class="individual">
+    <header>
+        <h1>Individual Carbon Footprint Calculator</h1>
+    </header>
+
+    <!-- ===== NAVIGATION BAR ===== -->
+    <nav>
+        <ul class="navbar">
+            <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+            <li><a href="individual.html" class="active"><i class="fa-solid fa-user"></i> Individual</a></li>
+            <li><a href="business.html"><i class="fa-solid fa-briefcase"></i> Business</a></li>
+            <li><a href="projects.html"><i class="fa-solid fa-diagram-project"></i> Projects</a></li>
+            <li><a href="about.php"><i class="fa-solid fa-circle-info"></i> About</a></li>
+        </ul>
+    </nav>
+
+    <section class="content">
+       <h2><p>Know your carbon emission as an individual.</p></h2>
+    </section>
+
+    <!-- Forms and Tracker Side by Side -->
+    <main class="form-tracker-container">
+        <!-- Form Box -->
+        <div class="form-box">
+            <!-- Form 1 -->
+            <div class="slide" id="form-step-1">
+                <h3>Household Energy Use</h3>
+                <form>
+                    <label>Electricity Use (kwh/month):
+                        <input type="number" id="electricity" required>
+                    </label>
+                    <label>Gas Use (kg/month):
+                        <input type="number" id="gas" required>
+                    </label>
+                    <div class="form-nav">
+                        <button type="button" onclick="nextForm()">Next</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Form 2 -->
+            <div class="slide" id="form-step-2" style="display:none;">
+                <h3>Transportation</h3>
+                <form>
+                    <label>Distance Driven (km/month):
+                        <input type="number" id="drive" required>
+                    </label>
+                    <label>Fuel Efficiency (km/litre):
+                        <input type="number" id="efficiency" required>
+                    </label>
+                    <div class="form-nav">
+                        <button type="button" onclick="prevForm()">Previous</button>
+                        <button type="button" onclick="nextForm()">Next</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Form 3 -->
+            <div class="slide" id="form-step-3" style="display:none;">
+                <h3>Travel</h3>
+                <form>
+                    <label>Air Travel (hours/year):
+                        <input type="number" id="flight" required>
+                    </label>
+                    <label>Bus/Train Travel (hours/year):
+                        <input type="number" id="public" required>
+                    </label>
+                    <label>Select your Country:
+                        <select id="country">
+                             <option value="South Africa">South Africa</option>
+                               <option value="Botswana">Botswana</option>
+                              <option value="Namibia">Namibia</option>
+                            <option value="Zimbabwe">Zimbabwe</option>
+                             <option value="Mozambique">Mozambique</option>
+                             <option value="Zambia">Zambia</option>
+                             <option value="Lesotho">Lesotho</option>
+                             <option value="Eswatini">Eswatini</option>
+                        </select>
+                    </label>
+                    <div class="form-nav">
+                        <button type="button" onclick="prevForm()">Previous</button>
+                        <button type="button" onclick="calculateFootprint()">Calculate Total Footprint</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Tracker Box -->
+        <aside class="tracker-box">
+            <h4>Emission Tracker</h4>
+            <p>Your Annual Emission: <span id="yourEmission">0</span> tons CO₂</p>
+            <p>Country Average: <span id="countryEmission">0</span> tons CO₂</p>
+            <p>World Average: <span id="worldEmission">4.7</span> tons CO₂</p>
+        </aside>
+    </main>
+
+    <script>
+        // Form navigation
+        let currentForm = 1;
+        function showForm(step) {
+            document.querySelectorAll('.slide').forEach((form, index) => {
+                form.style.display = (index === step - 1) ? 'block' : 'none';
+            });
+        }
+
+        function nextForm() {
+            if (currentForm < 3) {
+                currentForm++;
+                showForm(currentForm);
+            }
+        }
+
+        function prevForm() {
+            if (currentForm > 1) {
+                currentForm--;
+                showForm(currentForm);
+            }
+        }
+
+        // Footprint calculation
+        function calculateFootprint() {
+            const electricity = Number(document.getElementById('electricity').value);
+            const gas = Number(document.getElementById('gas').value);
+            const drive = Number(document.getElementById('drive').value);
+            const efficiency = Number(document.getElementById('efficiency').value);
+            const flight = Number(document.getElementById('flight').value);
+            const publicT = Number(document.getElementById('public').value);
+            const country = document.getElementById('country').value;
+
+            let householdEmission = (electricity * 0.0007 + gas * 0.002) * 12;
+            let transportEmission = (drive / efficiency * 2.31) * 12 / 1000;
+            let travelEmission = (flight * 0.09 + publicT * 0.02);
+
+            let total = (householdEmission + transportEmission + travelEmission).toFixed(2);
+
+            document.getElementById('yourEmission').innerText = total;
+
+            const countryData = {
+                "South Africa": 7.0,
+                "Zimbabwe": 1.2,
+                "Zambia": 0.9,
+                "Botswana": 2.0,
+                "Namibia": 1.8,
+                "Mozambique": 0.3,
+                "Lesotho": 3.4,
+                "Eswatini":7.4,
+            };
+            document.getElementById('countryEmission').innerText = countryData[country];
+        }
+
+        // Initialize first form
+        window.onload = function() {
+            showForm(currentForm);
+        }
+    </script>
+
+    <!-- ===== Footer ===== -->
+    <footer>
+        <div class="footer-container">
+            <!-- Contact Section -->
+            <div class="footer-contact">
+                <h4>Contact Us</h4>
+                <p>Email: <a href="mailto:info@southen_revive.com">info@SouthenRevive.com</a></p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-x-twitter"></i></a>
+                </div>
+            </div>
+
+            <!-- Quick Links Section -->
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+               <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="individual.html">Individual</a></li>
+                    <li><a href="business.html">Business</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="about.php">About</a></li>
+                </ul>
+            </div>
+
+            <!-- Actions Section -->
+            <div class="footer-actions">
+                <h4>Get Involved</h4>
+               <p> call:087-7688</p>
+            </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+            <p>&copy; 2025 SOUTHEN REVIVE. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

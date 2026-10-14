@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Projects Page</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
+</head>
+<body>
+  <nav>
+    <ul class="navbar">
+      <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+      <li><a href="individual.html"><i class="fa-solid fa-user"></i> Individual</a></li>
+      <li><a href="business.html"><i class="fa-solid fa-briefcase"></i> Business</a></li>
+      <li><a href="projects.html" class="active"><i class="fa-solid fa-diagram-project"></i> Projects</a></li>
+      <li><a href="about.php"><i class="fa-solid fa-circle-info"></i> About</a></li>
+    </ul>
+  </nav>
+
+  <section class="content">
+    <h1>Projects</h1>
+    <p>Explore the various projects we are working on as an Organization.</p>
+  </section>
+
+  <!-- ===== Projects Grid Section ===== -->
+  <section class="projects-section">
+    <h2>Project Continuation Confirmation</h2>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-image">
+          <img src="emma-swoboda-Bv7IngxhD6A-unsplash (1).jpg" alt="SADC Project">
+        </div>
+        <div class="project-content">
+          <h4>Reduced Emissions from Deforestation and Degradation</h4>
+          <h3>SADC ProjectS</h3>
+          <p>The Southen Revival + Project is dedicated to forest preservation.</p>
+          <a href="#">Learn More ></a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-image">
+          <img src="vitor-monthay-EkEdHarUPTs-unsplash.jpg" alt="Focusing on the future of nature">
+        </div>
+        <div class="project-content">
+          <h4>Forest Project Protocol</h4>
+          <h3>Restoring Nature</h3>
+          <p>This project fights CO₂ emissions by restoring forest lands under the SOUTHEN REVIVE Forest Project Protocol.</p>
+          <a href="#">Learn More ></a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-image">
+          <img src="andreas-gucklhorn-Ilpf2eUPpUE-unsplash.jpg" alt="Clean Energy Program">
+        </div>
+        <div class="project-content">
+          <h4>Clean Energy & Employment</h4>
+          <h3>Making use of clean energy programs</h3>
+          <p>The Clean Energy Program aims to reduce carbon output and using natural resources.</p>
+          <a href="#">Learn More ></a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-image">
+          <img src="tejj-o8iXJVAahUc-unsplash.jpg" alt="HYDRO Initiative">
+        </div>
+        <div class="project-content">
+          <h4>HYDROELECTRICAL PROGRAM</h4>
+          <h3>Lets use Infinite Energy</h3>
+          <p>Aims to switch from wood-burning to Hydrolic power supply.</p>
+          <a href="#">Learn More ></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Offset Box Section ===== -->
+  <section class="offset-box">
+    <h2>Offset</h2>
+    <h3> CONTRIBUTE TO THE DEVELOPMENT AND REVIVAL OF EARTH</h3>
+    <div class="offset-controls">
+      <button class="offset-btn active">One-Time</button>
+      <button class="offset-btn">Monthly</button>
+    </div>
+    <div class="offset-input">
+      <label for="offsetAmount">Amount you can contribute (USD):</label>
+      <input type="number" id="offsetAmount" placeholder="e.g. 25.00" />
+    </div>
+    <button class="submit-offset">Submit</button>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-contact">
+        <h4>Contact Us</h4>
+        <p>Email: <a href="mailto:info@southen_revive.com">info@SouthenRevive.com</a></p>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-x-twitter"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+      <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="individual.html">Individual</a></li>
+                    <li><a href="business.html">Business</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="about.php">About</a></li>
+                </ul>
+      </div>
+
+      <div class="footer-actions">
+        <h4>Get Involved</h4>
+       <p> call:087-7688</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+     <p>&copy; 2025 SOUTHEN REVIVE. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ===== Offset Box Script ===== -->
+  <script>
+    // Toggle active button
+    const offsetButtons = document.querySelectorAll('.offset-btn');
+    offsetButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        offsetButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+
+    // Handle submit
+    document.querySelector('.submit-offset').addEventListener('click', () => {
+      const amount = document.getElementById('offsetAmount').value;
+      const type = document.querySelector('.offset-btn.active').textContent;
+      if (amount) {
+        alert(`You selected a ${type} offset of $${amount}`);
+      } else {
+        alert("Please enter an amount to contribute.");
+      }
+    });
+  </script>
+</body>
+</html>

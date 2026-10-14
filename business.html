@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Business Carbon Footprint Calculator</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+  <style>
+    select:invalid {
+      color: #ffffff;
+    }
+    select option[value=""] {
+      color: #999;
+    }
+  </style>
+</head>
+<body class="business">
+<header>
+   <h1>BUSINESS Carbon Footprint Calculator</h1>
+</header>
+  <!-- ===== NAVIGATION BAR ===== -->
+  <nav>
+    <ul class="navbar">
+      <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+      <li><a href="individual.html"><i class="fa-solid fa-user"></i> Individual</a></li>
+      <li><a href="business.html" class="active"><i class="fa-solid fa-briefcase"></i> Business</a></li>
+      <li><a href="projects.html"><i class="fa-solid fa-diagram-project"></i> Projects</a></li>
+      <li><a href="about.php"><i class="fa-solid fa-circle-info"></i> About</a></li>
+    </ul>
+  </nav>
+
+  <!-- ===== BUSINESS CALCULATOR ===== -->
+  <div class="calculator-container">
+    <!-- LEFT SIDE -->
+    <div class="input-section">
+      <h2><i class="fa-solid fa-building"></i> BUSINESS <span>SITE</span></h2>
+      <p>Let's find out about your business site energy usage</p>
+
+      <form id="businessForm">
+        <label for="country">YOUR COUNTRY:</label>
+        <select id="country" required>
+          <option value="">Select Country</option>
+          <option value="South Africa">South Africa</option>
+          <option value="Botswana">Botswana</option>
+          <option value="Namibia">Namibia</option>
+          <option value="Zimbabwe">Zimbabwe</option>
+          <option value="Mozambique">Mozambique</option>
+          <option value="Zambia">Zambia</option>
+          <option value="Lesotho">Lesotho</option>
+          <option value="Eswatini">Eswatini</option>
+        </select>
+
+        
+        <hr />
+
+        <h3>Enter Monthly Usage</h3>
+        <label for="electricity">Electricity (kWh/ Month):</label>
+        <input type="number" id="electricity" placeholder="e.g. 1000" />
+
+        <label for="fuel">Fleet Fuel (litres/ Month):</label>
+        <input type="number" id="fuel" placeholder="e.g. 500" />
+
+        <label for="air">Air Travel (km/ Month):</label>
+        <input type="number" id="air" placeholder="e.g. 2000" />
+
+        <label for="commute">Commute (km/ Month):</label>
+        <input type="number" id="commute" placeholder="e.g. 300" />
+
+        <label for="shipping">Shipping (kg goods):</label>
+        <input type="number" id="shipping" placeholder="e.g. 800" />
+
+        <label for="server">Server Energy (kWh):</label>
+        <input type="number" id="server" placeholder="e.g. 200" />
+
+        <div class="button-group">
+          <button type="button" id="prevBtn">Prev</button>
+           <button type="button" id="calcBtn">Calculate</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- RIGHT SIDE -->
+    <div class="output-section">
+      <h2>YOUR CARBON <span>DASHBOARD</span></h2>
+      <h3>YOUR TOTAL</h3>
+      <p id="totalEmission">0.00 lbs of CO₂e</p>
+
+      <h3>YOUR EMISSIONS</h3>
+      <table>
+        <tr><td>Site:</td><td id="siteEmission">0.00 lbs CO₂e</td></tr>
+        <tr><td>Fleet:</td><td id="fleetEmission">0.00 lbs CO₂e</td></tr>
+        <tr><td>Air Travel:</td><td id="airEmission">0.00 lbs CO₂e</td></tr>
+        <tr><td>Commute:</td><td id="commuteEmission">0.00 lbs CO₂e</td></tr>
+        <tr><td>Shipping:</td><td id="shippingEmission">0.00 lbs CO₂e</td></tr>
+        <tr><td>Server:</td><td id="serverEmission">0.00 lbs CO₂e</td></tr>
+      </table>
+
+      
+      <h3>TOTAL</h3>
+      <p id="summaryText">Your carbon footprint is 0.00 lbs of CO₂e.</p>
+
+      <a href="#" onclick="showMetric()">See Results in MT</a>
+      <p id="metricNote">That’s equivalent to 0.00 metric tons of CO₂e emissions.</p>
+
+      <select id="offsetDropdown">
+        <option value="0">Offset 0.00 lbs of CO₂e</option>
+      </select>   
+    </div>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-contact">
+        <h4>Contact Us</h4>
+        <p>Email: <a href="mailto:info@southen_revive.com">info@SouthenRevive.com</a></p>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-x-twitter"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="individual.html">Individual</a></li>
+                    <li><a href="business.html">Business</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="about.php">About</a></li>
+                </ul>
+      </div>
+
+      <div class="footer-actions">
+        <h4>Get Involved</h4>
+        <p> call:087-7688</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2025 SOUTHEN REVIVE. All rights reserved.</p>
+    </div>
+  </footer>
+
+
+  <!-- ===== SCRIPT ===== -->
+<script >
+  function showMetric() {
+    const totalText = document.getElementById("totalEmission").textContent;
+    const total = parseFloat(totalText) || 0;
+    const metric = (total * 0.000453592).toFixed(2);
+    document.getElementById("metricNote").textContent = `That’s equivalent to ${metric} metric tons of CO₂e emissions.`;
+  }
+
+  document.getElementById("calcBtn").addEventListener("click", function () {
+    const electricity = parseFloat(document.getElementById("electricity").value) || 0;
+    const fuel = parseFloat(document.getElementById("fuel").value) || 0;
+    const air = parseFloat(document.getElementById("air").value) || 0;
+    const commute = parseFloat(document.getElementById("commute").value) || 0;
+    const shipping = parseFloat(document.getElementById("shipping").value) || 0;
+    const server = parseFloat(document.getElementById("server").value) || 0;
+
+    // Emission factors (lbs CO₂e per unit)
+    const siteCO2 = electricity * 1.6;
+    const fleetCO2 = fuel * 19.6;
+    const airCO2 = air * 0.25;
+    const commuteCO2 = commute * 0.21;
+    const shippingCO2 = shipping * 0.05;
+    const serverCO2 = server * 1.2;
+
+    const total = siteCO2 + fleetCO2 + airCO2 + commuteCO2 + shippingCO2 + serverCO2;
+
+    // Update individual emissions
+    document.getElementById("siteEmission").textContent = `${siteCO2.toFixed(2)} lbs CO₂e`;
+    document.getElementById("fleetEmission").textContent = `${fleetCO2.toFixed(2)} lbs CO₂e`;
+    document.getElementById("airEmission").textContent = `${airCO2.toFixed(2)} lbs CO₂e`;
+    document.getElementById("commuteEmission").textContent = `${commuteCO2.toFixed(2)} lbs CO₂e`;
+    document.getElementById("shippingEmission").textContent = `${shippingCO2.toFixed(2)} lbs CO₂e`;
+    document.getElementById("serverEmission").textContent = `${serverCO2.toFixed(2)} lbs CO₂e`;
+
+    // Update total
+    document.getElementById("totalEmission").textContent = `${total.toFixed(2)} lbs of CO₂e`;
+    document.getElementById("summaryText").textContent = `Your carbon footprint is ${total.toFixed(2)} lbs of CO₂e.`;
+
+    // Update metric conversion
+    const metric = (total * 0.000453592).toFixed(2);
+    document.getElementById("metricNote").textContent = `That’s equivalent to ${metric} metric tons of CO₂e emissions.`;
+
+    // Update offset dropdown
+    const offsetDropdown = document.getElementById("offsetDropdown");
+    offsetDropdown.innerHTML = "";
+    const offsetOption = document.createElement("option");
+    offsetOption.value = total.toFixed(2);
+    offsetOption.textContent = `Offset ${total.toFixed(2)} lbs of CO₂e`;
+    offsetDropdown.appendChild(offsetOption);
+  });
+
+  document.getElementById("offsetBtn").addEventListener("click", function () {
+    const amount = document.getElementById("offsetDropdown").value;
+    alert(`Redirecting to offset purchase for ${amount} lbs of CO₂e...`);
+    // You can replace this with a real link or modal
+  });
+</script>
+
+</body>
+</html>
